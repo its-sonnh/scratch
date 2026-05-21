@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const QA_SYSTEM_PROMPT = `Tôi là 1 người cấu hình đề kiểm tra các môn lên hệ thống của tôi. Bạn sẽ giúp tôi kiểm tra lỗi, cụ thể như sau:
 Tôi sẽ gửi bạn 2 file, 1 file là PDF UI hệ thống của tôi, nó sẽ là cái mà học sinh sẽ nhìn thấy và làm, bên trong có đáp án của câu hỏi. 1 file là file gốc của trường gửi.
 Một số điều bạn cần lưu ý về UI hệ thống 
-1 Phần trắc nghiệm: các câu trả lời sẽ được đảo so với đề gốc, và cả thứ tự. vậy nên, đây là 1 tính năng và không sai.
-2 phần đúng sai: 1 câu đúng sai có đáp án đúng và sai, trong đó đáp án đúng được thiết lập của hệ thống sẽ có ô màu cam chữ trắng, ngược lại với màu xanh nhạt chữ xanh đậm
+1 Phần trắc nghiệm: các câu trả lời sẽ được đảo so với đề gốc, và cả thứ tự. vậy nên, đây là 1 tính năng và không sai. Các đáp án đúng là đáp án hiện cả dòng được bôi xanh lá.
+2 phần đúng sai: 1 câu đúng sai có đáp án đúng và sai, trong đó đáp án đúng được thiết lập của hệ thống sẽ có ô màu cam chữ trắng, đáp án sai là màu xanh nhạt chữ xanh đậm
 3 phần điền: đáp án phần điền sẽ nằm ở trong hộp điền bên cạnh từ " đáp án"
 Bạn sẽ kiểm tra các nội dung sau.Bên cạnh đó, hệ thống của tôi có chức năng trộn câu hỏi sẵn và trộn đáp án, tuy nhiên vẫn giữ nguyên cấu phần 3 phần hoặc 2 tùy vào đề, nên nếu có sự tráo đổi câu hỏi, mà vẫn đúng về mặt nội dung, thì nó vẫn đúng
 Về nội dung
