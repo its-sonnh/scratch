@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onluyen QA Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="topbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            </div>
+            <div class="logo-text">
+                <h1>Onluyen QA Pro</h1>
+                <p>HỆ THỐNG HỖ TRỢ CẤU HÌNH THI</p>
+            </div>
+        </div>
+        <nav class="tools-nav">
+            <button class="nav-btn active" data-target="view-qa">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Kiểm tra đề thi
+            </button>
+            <button class="nav-btn" data-target="view-xml">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                Convert để XML
+            </button>
+            <button class="nav-btn" data-target="view-docx">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><text x="9" y="18" font-family="Arial" font-size="8" font-weight="bold">W</text></svg>
+                Convert đề sang mẫu docx
+            </button>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- View: Kiểm tra đề thi -->
+        <section id="view-qa" class="view-section active">
+            <div class="header-title">
+                <h2>Kiểm tra chất lượng đề thi</h2>
+                <p>So sánh dữ liệu hệ thống với đề thi gốc để phát hiện sai sót.</p>
+            </div>
+
+            <div class="settings-container" style="margin-bottom: 24px;">
+                <div class="input-group">
+                    <label for="qa-gemini-api-key">Gemini API Key</label>
+                    <input type="password" id="qa-gemini-api-key" placeholder="Nhập API Key của bạn (Key chỉ lưu trên trình duyệt)...">
+                </div>
+
+            </div>
+
+            <div class="upload-container">
+                <div class="upload-zone" id="zone-sys">
+                    <div class="zone-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span>1. FILE UI HỆ THỐNG (PDF)</span>
+                    </div>
+                    <div class="drop-area" id="drop-sys">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                        <p class="upload-text">Nhấp để tải lên PDF</p>
+                        <p class="upload-subtext">CHỈ CHẤP NHẬN FILE .PDF</p>
+                        <input type="file" id="file-sys" accept=".pdf" hidden>
+                    </div>
+                </div>
+
+                <div class="upload-zone" id="zone-orig">
+                    <div class="zone-header">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        <span>2. FILE ĐỀ GỐC (PDF)</span>
+                    </div>
+                    <div class="drop-area" id="drop-orig">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                        <p class="upload-text">Nhấp để tải lên PDF</p>
+                        <p class="upload-subtext">CHỈ CHẤP NHẬN FILE .PDF</p>
+                        <input type="file" id="file-orig" accept=".pdf" hidden>
+                    </div>
+                </div>
+            </div>
+
+            <button class="primary-btn" id="btn-process-qa" disabled>
+                Bắt đầu quy trình kiểm tra
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+
+            <!-- Kết quả kiểm tra -->
+            <div id="qa-result-container" style="display: none; margin-top: 24px;">
+                <div class="col-header" style="margin-bottom: 12px;">
+                    <h3>Kết quả AI</h3>
+                </div>
+                <div id="qa-response-box" class="chatbox-output" style="min-height: 150px; padding: 16px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; white-space: normal; font-family: inherit; line-height: 1.5;">
+                </div>
+            </div>
+        </section>
+
+        <!-- View: Convert để XML -->
+        <section id="view-xml" class="view-section">
+            <div class="header-title">
+                <h2>Convert đề XML</h2>
+                <p>Chức năng đang được phát triển...</p>
+            </div>
+            <div class="development-box">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0056D2" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                <h3>Tính năng đang phát triển</h3>
+                <p>Chúng tôi đang nỗ lực hoàn thiện chức năng này. Vui lòng quay lại sau!</p>
+            </div>
+        </section>
+
+        <!-- View: Convert đề sang mẫu docx -->
+        <section id="view-docx" class="view-section">
+            <div class="header-title">
+                <h2>Convert đề sang mẫu Docx</h2>
+                <p>Chuyển đổi dữ liệu đề thi sang định dạng tài liệu Word tiêu chuẩn bằng AI.</p>
+            </div>
+            
+            <div class="settings-container">
+                <div class="input-group">
+                    <label for="gemini-api-key">Gemini API Key</label>
+                    <input type="password" id="gemini-api-key" placeholder="Nhập API Key của bạn...">
+                </div>
+
+            </div>
+
+            <div class="docx-workspace">
+                <div class="workspace-col input-col">
+                    <div class="col-header">
+                        <h3>Input: File PDF Đề thi</h3>
+                    </div>
+                    <div class="upload-zone" style="height: 100%; display: flex; flex-direction: column; padding: 16px;">
+                        <div class="drop-area" id="drop-docx-pdf" style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px dashed var(--border-dash); border-radius: 12px; background-color: var(--card-bg); cursor: pointer; transition: all 0.2s ease;">
+                            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 48px; height: 48px; color: #93c5fd; margin-bottom: 16px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                            <p class="upload-text" style="font-size: 16px; font-weight: 500; color: var(--primary-color); margin-bottom: 8px;">Nhấp để tải lên PDF</p>
+                            <p class="upload-subtext" style="font-size: 12px; font-weight: 600; color: var(--text-muted);">CHỈ CHẤP NHẬN FILE .PDF</p>
+                            <input type="file" id="file-docx-pdf" accept=".pdf" hidden>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="workspace-col output-col">
+                    <div class="col-header">
+                        <h3>Output: AI Response</h3>
+                    </div>
+                    <div id="ai-response-box" class="chatbox-output">
+                        <div class="placeholder-text">Kết quả trả về từ AI sẽ hiển thị ở đây...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="primary-btn" id="btn-convert-docx">
+                    Bắt đầu Convert
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        © 2026 ONLUYEN.VN EXAM MANAGEMENT SYSTEM
+    </footer>
+
+    <!-- Markdown & LaTeX renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
